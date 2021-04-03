@@ -1,0 +1,12 @@
+@inject IJSRuntime JS
+
+@code {
+    protected override void OnInitialized()
+    {
+        StocksService.OnStockTickerUpdated += stockUpdate =>
+        {
+            JS.InvokeVoidAsync("handleTickerChanged",
+                stockUpdate.symbol, stockUpdate.price);
+        };
+    }
+}
